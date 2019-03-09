@@ -38,13 +38,27 @@ public class MenuPanel extends JPanel {
             App.setMode(DrawAction.RAY);
             DrawPanel.clearPoints();
         });
+        JRadioButton lineBtn = new JRadioButton("Line");
+        lineBtn.addActionListener(e -> {
+            App.setMode(DrawAction.LINE);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton polylineBtn = new JRadioButton("Polyline");
+        polylineBtn.addActionListener(e -> {
+            App.setMode(DrawAction.POLYLINE);
+            DrawPanel.clearPoints();
+        });
 
         switchFigure.add(segmentBtn);
         switchFigure.add(rayBtn);
+        switchFigure.add(lineBtn);
+        switchFigure.add(polylineBtn);
 
         add(colorChooser);
         add(segmentBtn);
         add(rayBtn);
+        add(lineBtn);
+        add(polylineBtn);
 
         segmentBtn.doClick();
     }

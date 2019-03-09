@@ -1,7 +1,10 @@
 package graphics;
 
+import figures.lines.Line;
+import figures.lines.PolyLine;
+import figures.lines.Ray;
 import figures.Shape;
-import figures.Segment;
+import figures.lines.Segment;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +36,25 @@ public class DrawPanel extends JPanel {
                         }
                         break;
                     case RAY:
-
+                        if (points.size() == 2) {
+                            figures.add(new Ray(points.get(0), points.get(1), MenuPanel.getCurrentColor()));
+                            clearPoints();
+                        }
+                        break;
+                    case LINE:
+                        if (points.size() == 2) {
+                            figures.add(new Line(points.get(0), points.get(1), MenuPanel.getCurrentColor()));
+                            clearPoints();
+                        }
+                        break;
+                    case POLYLINE:
+                        if (points.size() == 1) {
+                            figures.add(new PolyLine(points.get(0), MenuPanel.getCurrentColor()));
+                        }
+                        else {
+                            PolyLine polyLine = (PolyLine) figures.get(figures.size()-1);
+                            polyLine.addSegment(points.get(points.size()-1), MenuPanel.getCurrentColor());
+                        }
                         break;
                 }
                 repaint();

@@ -1,5 +1,5 @@
 package utils;
 
 public enum DrawAction {
-    SEGMENT, RAY
+    SEGMENT, RAY, LINE, POLYLINE
 }

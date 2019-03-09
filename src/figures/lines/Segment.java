@@ -1,4 +1,6 @@
-package figures;
+package figures.lines;
+
+import figures.Shape;
 
 import java.awt.*;
 
