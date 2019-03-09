@@ -45,14 +45,14 @@ public class DrawPanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(MenuPanel.getCurrentColor());
-        points.forEach(point -> g.drawLine(point.x, point.y, point.x, point.y));
+        points.forEach(point -> g.fillRect(point.x, point.y, 4, 4));
         figures.forEach(figure -> {
             g.setColor(figure.getLineColor());
             figure.draw(g);
         });
     }
 
-    public void clearPoints() {
+    public static void clearPoints() {
         points.clear();
     }
 }
