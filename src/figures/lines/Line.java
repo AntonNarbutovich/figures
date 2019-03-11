@@ -16,9 +16,4 @@ public class Line extends Ray {
                 getOutPoint(getSecondPoint(), getTheCenter()).x, getOutPoint(getSecondPoint(), getTheCenter()).y);
     }
 
-    @Override
-    public void move(Point p) {
-
-    }
-
 }

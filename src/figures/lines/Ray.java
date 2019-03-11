@@ -16,16 +16,12 @@ public class Ray extends Segment {
                 getOutPoint(getTheCenter(), getSecondPoint()).x, getOutPoint(getTheCenter(), getSecondPoint()).y);
     }
 
-    @Override
-    public void move(Point p) {
-
-    }
 
     Point getOutPoint(Point p1, Point p2) {
         Point result = new Point();
         double deltaX = p2.x - p1.x;
         double deltaY = p2.y - p1.y;
-        if (deltaX==0 && deltaY==0)
+        if (deltaX == 0 && deltaY == 0)
             return p2;
         if (Math.abs(deltaX) < Math.abs(deltaY)) {
             double height;

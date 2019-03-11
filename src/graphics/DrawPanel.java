@@ -5,16 +5,20 @@ import figures.lines.PolyLine;
 import figures.lines.Ray;
 import figures.Shape;
 import figures.lines.Segment;
+import utils.DrawAction;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 public class DrawPanel extends JPanel {
     private static ArrayList<Point> points;
     private ArrayList<Shape> figures;
+    private Shape curFigure;
 
     public DrawPanel() {
         setPreferredSize(new Dimension(900, 700));
@@ -29,6 +33,15 @@ public class DrawPanel extends JPanel {
                 super.mouseClicked(e);
                 points.add(e.getPoint());
                 switch (App.getMode()) {
+                    case MOVE:
+                        for (Shape figure : figures) {
+                            if (figure.contains(e.getPoint())) {
+                                curFigure = figure;
+                                break;
+                            }
+                        }
+                        clearPoints();
+                        break;
                     case SEGMENT:
                         if (points.size() == 2) {
                             figures.add(new Segment(points.get(0), points.get(1), MenuPanel.getCurrentColor()));
@@ -50,14 +63,23 @@ public class DrawPanel extends JPanel {
                     case POLYLINE:
                         if (points.size() == 1) {
                             figures.add(new PolyLine(points.get(0), MenuPanel.getCurrentColor()));
-                        }
-                        else {
-                            PolyLine polyLine = (PolyLine) figures.get(figures.size()-1);
-                            polyLine.addSegment(points.get(points.size()-1), MenuPanel.getCurrentColor());
+                        } else {
+                            PolyLine polyLine = (PolyLine) figures.get(figures.size() - 1);
+                            polyLine.addSegment(points.get(points.size() - 1), MenuPanel.getCurrentColor());
                         }
                         break;
                 }
                 repaint();
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                if (App.getMode() == DrawAction.MOVE && curFigure != null) {
+                    curFigure.move(e.getPoint());
+                    repaint();
+                }
             }
         });
     }

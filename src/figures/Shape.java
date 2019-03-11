@@ -31,4 +31,6 @@ public abstract class Shape {
 
     public abstract void move(Point p);
 
+    public abstract boolean contains(Point p);
+
 }

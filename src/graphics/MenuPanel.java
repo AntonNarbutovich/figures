@@ -28,6 +28,11 @@ public class MenuPanel extends JPanel {
         colorChooser.addActionListener(e -> currentColor = JColorChooser.showDialog(this, "Choose color", Color.BLACK));
 
         switchFigure = new ButtonGroup();
+        JRadioButton moveBtn = new JRadioButton("Move");
+        moveBtn.addActionListener(e -> {
+            App.setMode(DrawAction.MOVE);
+            DrawPanel.clearPoints();
+        });
         JRadioButton segmentBtn = new JRadioButton("Segment");
         segmentBtn.addActionListener(e -> {
             App.setMode(DrawAction.SEGMENT);
@@ -49,12 +54,14 @@ public class MenuPanel extends JPanel {
             DrawPanel.clearPoints();
         });
 
+        switchFigure.add(moveBtn);
         switchFigure.add(segmentBtn);
         switchFigure.add(rayBtn);
         switchFigure.add(lineBtn);
         switchFigure.add(polylineBtn);
 
         add(colorChooser);
+        add(moveBtn);
         add(segmentBtn);
         add(rayBtn);
         add(lineBtn);
