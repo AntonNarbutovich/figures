@@ -53,12 +53,62 @@ public class MenuPanel extends JPanel {
             App.setMode(DrawAction.POLYLINE);
             DrawPanel.clearPoints();
         });
+        JRadioButton ellipseBtn = new JRadioButton("Ellipse");
+        ellipseBtn.addActionListener(e -> {
+            App.setMode(DrawAction.ELLIPSE);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton circleBtn = new JRadioButton("Circle");
+        circleBtn.addActionListener(e -> {
+            App.setMode(DrawAction.CIRCLE);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton rectBtn = new JRadioButton("Rectangle");
+        rectBtn.addActionListener(e -> {
+            App.setMode(DrawAction.RECTANGLE);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton polygonBtn = new JRadioButton("Polygon");
+        polygonBtn.addActionListener(e -> {
+            App.setMode(DrawAction.POLYGON);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton triangleBtn = new JRadioButton("Triangle");
+        triangleBtn.addActionListener(e -> {
+            App.setMode(DrawAction.TRIANGLE);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton rhombBtn = new JRadioButton("Rhombus");
+        rhombBtn.addActionListener(e -> {
+            App.setMode(DrawAction.RHOMBUS);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton squareBtn = new JRadioButton("Square");
+        squareBtn.addActionListener(e -> {
+            App.setMode(DrawAction.SQUARE);
+            DrawPanel.clearPoints();
+        });
+        JRadioButton rhightTrBtn = new JRadioButton("Right Triangle");
+        rhightTrBtn.addActionListener(e -> {
+            App.setMode(DrawAction.RIGHTTRIANGLE);
+            DrawPanel.clearPoints();
+        });
 
         switchFigure.add(moveBtn);
         switchFigure.add(segmentBtn);
         switchFigure.add(rayBtn);
         switchFigure.add(lineBtn);
         switchFigure.add(polylineBtn);
+        switchFigure.add(ellipseBtn);
+        switchFigure.add(circleBtn);
+        switchFigure.add(rectBtn);
+        switchFigure.add(polygonBtn);
+        switchFigure.add(triangleBtn);
+        switchFigure.add(rhombBtn);
+        switchFigure.add(squareBtn);
+        switchFigure.add(rhightTrBtn);
+
+
 
         add(colorChooser);
         add(moveBtn);
@@ -66,6 +116,15 @@ public class MenuPanel extends JPanel {
         add(rayBtn);
         add(lineBtn);
         add(polylineBtn);
+        add(ellipseBtn);
+        add(circleBtn);
+        add(rectBtn);
+        add(polygonBtn);
+        add(triangleBtn);
+        add(rhombBtn);
+        add(squareBtn);
+        add(rhightTrBtn);
+
 
         segmentBtn.doClick();
     }
