@@ -50,7 +50,6 @@ public class Polygon2D extends Shape2D{
 
     @Override
     public void move(Point p) { //Point p - новый центр полигона (хотя я не знаю что такое центр полигона)
-        setTheCenter(p);
         ArrayList<Point> newPoints = new ArrayList<>();
         for (Point point: points) {
             Point newPoint = new Point((int) (point.getX() + p.getX() - getTheCenter().getX()),
@@ -58,6 +57,7 @@ public class Polygon2D extends Shape2D{
             newPoints.add(newPoint);
         }
         setPoints(newPoints);
+        setTheCenter(p);
     }
 
     @Override

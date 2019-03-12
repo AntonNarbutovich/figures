@@ -77,11 +77,11 @@ public class DrawPanel extends JPanel {
                         break;
                     case POLYGON:
                         if(points.size() == 2){
-                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points));
+                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
                         }
                         else if(points.size() > 2){
                             figures.remove(figures.size() - 1);
-                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points));
+                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
                         }
                         break;
                 }
