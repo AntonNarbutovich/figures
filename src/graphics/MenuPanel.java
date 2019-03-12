@@ -73,24 +73,14 @@ public class MenuPanel extends JPanel {
             App.setMode(DrawAction.POLYGON);
             DrawPanel.clearPoints();
         });
-        JRadioButton triangleBtn = new JRadioButton("Triangle");
-        triangleBtn.addActionListener(e -> {
-            App.setMode(DrawAction.TRIANGLE);
-            DrawPanel.clearPoints();
-        });
         JRadioButton rhombBtn = new JRadioButton("Rhombus");
         rhombBtn.addActionListener(e -> {
             App.setMode(DrawAction.RHOMBUS);
             DrawPanel.clearPoints();
         });
-        JRadioButton squareBtn = new JRadioButton("Square");
-        squareBtn.addActionListener(e -> {
-            App.setMode(DrawAction.SQUARE);
-            DrawPanel.clearPoints();
-        });
-        JRadioButton rhightTrBtn = new JRadioButton("Right Triangle");
-        rhightTrBtn.addActionListener(e -> {
-            App.setMode(DrawAction.RIGHTTRIANGLE);
+        JRadioButton symBtn = new JRadioButton("Symmetric Figure");
+        symBtn.addActionListener(e -> {
+            App.setMode(DrawAction.SYMMETRICFIGURE);
             DrawPanel.clearPoints();
         });
 
@@ -103,10 +93,8 @@ public class MenuPanel extends JPanel {
         switchFigure.add(circleBtn);
         switchFigure.add(rectBtn);
         switchFigure.add(polygonBtn);
-        switchFigure.add(triangleBtn);
         switchFigure.add(rhombBtn);
-        switchFigure.add(squareBtn);
-        switchFigure.add(rhightTrBtn);
+        switchFigure.add(symBtn);
 
 
 
@@ -120,10 +108,8 @@ public class MenuPanel extends JPanel {
         add(circleBtn);
         add(rectBtn);
         add(polygonBtn);
-        add(triangleBtn);
         add(rhombBtn);
-        add(squareBtn);
-        add(rhightTrBtn);
+        add(symBtn);
 
 
         segmentBtn.doClick();
