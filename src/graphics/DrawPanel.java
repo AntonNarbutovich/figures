@@ -5,8 +5,10 @@ import figures.lines.PolyLine;
 import figures.lines.Ray;
 import figures.Shape;
 import figures.lines.Segment;
+import figures.shape2D.Circle;
 import figures.shape2D.Ellipse;
 import figures.shape2D.Polygon2D;
+import figures.shape2D.SymmetricFigure;
 import utils.DrawAction;
 
 import javax.swing.*;
@@ -82,6 +84,21 @@ public class DrawPanel extends JPanel {
                         else if(points.size() > 2){
                             figures.remove(figures.size() - 1);
                             figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
+                        }
+                        break;
+                    case CIRCLE:
+                        if(points.size() == 2){
+                            figures.add(new Circle(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points.get(1)));
+                            clearPoints();
+                        }
+                        break;
+                    case SYMMETRICFIGURE:
+                        if(points.size() == 2){
+                            figures.add(new SymmetricFigure(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points), points.size(), points.get(1)));
+                        }
+                        else if(points.size() > 2){
+                            figures.remove(figures.size() - 1);
+                            figures.add(new SymmetricFigure(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points), points.size(), points.get(1)));
                         }
                         break;
                 }
