@@ -5,6 +5,8 @@ import figures.lines.PolyLine;
 import figures.lines.Ray;
 import figures.Shape;
 import figures.lines.Segment;
+import figures.shape2D.Ellipse;
+import figures.shape2D.Polygon2D;
 import utils.DrawAction;
 
 import javax.swing.*;
@@ -43,28 +45,43 @@ public class DrawPanel extends JPanel {
                         break;
                     case SEGMENT:
                         if (points.size() == 2) {
-                            figures.add(new Segment(points.get(0), points.get(1), MenuPanel.getCurrentColor()));
+                            figures.add(new Segment(points.get(0), points.get(1), MenuPanel.getCurrentBorderColor()));
                             clearPoints();
                         }
                         break;
                     case RAY:
                         if (points.size() == 2) {
-                            figures.add(new Ray(points.get(0), points.get(1), MenuPanel.getCurrentColor()));
+                            figures.add(new Ray(points.get(0), points.get(1), MenuPanel.getCurrentBorderColor()));
                             clearPoints();
                         }
                         break;
                     case LINE:
                         if (points.size() == 2) {
-                            figures.add(new Line(points.get(0), points.get(1), MenuPanel.getCurrentColor()));
+                            figures.add(new Line(points.get(0), points.get(1), MenuPanel.getCurrentBorderColor()));
                             clearPoints();
                         }
                         break;
                     case POLYLINE:
                         if (points.size() == 1) {
-                            figures.add(new PolyLine(points.get(0), MenuPanel.getCurrentColor()));
+                            figures.add(new PolyLine(points.get(0), MenuPanel.getCurrentBorderColor()));
                         } else {
                             PolyLine polyLine = (PolyLine) figures.get(figures.size() - 1);
-                            polyLine.addSegment(points.get(points.size() - 1), MenuPanel.getCurrentColor());
+                            polyLine.addSegment(points.get(points.size() - 1), MenuPanel.getCurrentBorderColor());
+                        }
+                        break;
+                    case ELLIPSE:
+                        if(points.size() == 2){
+                            figures.add(new Ellipse(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points.get(1)));
+                            clearPoints();
+                        }
+                        break;
+                    case POLYGON:
+                        if(points.size() == 2){
+                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points));
+                        }
+                        else if(points.size() > 2){
+                            figures.remove(figures.size() - 1);
+                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points));
                         }
                         break;
                 }
@@ -86,7 +103,7 @@ public class DrawPanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(MenuPanel.getCurrentColor());
+        g.setColor(MenuPanel.getCurrentBorderColor());
         points.forEach(point -> g.fillRect(point.x, point.y, 4, 4));
         figures.forEach(figure -> {
             g.setColor(figure.getLineColor());

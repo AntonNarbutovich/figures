@@ -7,15 +7,19 @@ import java.awt.*;
 
 public class MenuPanel extends JPanel {
     private ButtonGroup switchFigure;
-    private JButton colorChooser;
-    private static Color currentColor;
+    private JButton borderColorChooser;
+    private JButton fillColorChooser;
+    private static Color currentBorderColor;
+    private static Color currentFillColor;
+    private JPanel colorPanel;
 
     public MenuPanel() {
         setPreferredSize(new Dimension(300, 700));
         setFocusable(true);
         setLayout(new GridLayout(20, 1));
         setButtons();
-        currentColor = Color.BLACK;
+        currentBorderColor = Color.BLACK;
+        currentFillColor = Color.BLACK;
     }
 
     @Override
@@ -24,8 +28,15 @@ public class MenuPanel extends JPanel {
     }
 
     private void setButtons() {
-        colorChooser = new JButton("Choose color");
-        colorChooser.addActionListener(e -> currentColor = JColorChooser.showDialog(this, "Choose color", Color.BLACK));
+        colorPanel = new JPanel(new GridLayout(1, 2));
+        borderColorChooser = new JButton("Border color");
+        borderColorChooser.addActionListener(e -> currentBorderColor = JColorChooser.showDialog(this, "Choose color", Color.BLACK));
+
+        fillColorChooser = new JButton("Fill color");
+        fillColorChooser.addActionListener(e -> currentFillColor = JColorChooser.showDialog(this, "Choose color", Color.BLACK));
+
+        colorPanel.add(borderColorChooser);
+        colorPanel.add(fillColorChooser);
 
         switchFigure = new ButtonGroup();
         JRadioButton moveBtn = new JRadioButton("Move");
@@ -98,7 +109,7 @@ public class MenuPanel extends JPanel {
 
 
 
-        add(colorChooser);
+        add(colorPanel);
         add(moveBtn);
         add(segmentBtn);
         add(rayBtn);
@@ -115,7 +126,11 @@ public class MenuPanel extends JPanel {
         segmentBtn.doClick();
     }
 
-    public static Color getCurrentColor() {
-        return currentColor;
+    public static Color getCurrentBorderColor() {
+        return currentBorderColor;
+    }
+
+    public static Color getCurrentFillColor() {
+        return currentFillColor;
     }
 }
