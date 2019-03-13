@@ -5,10 +5,7 @@ import figures.lines.PolyLine;
 import figures.lines.Ray;
 import figures.Shape;
 import figures.lines.Segment;
-import figures.shape2D.Circle;
-import figures.shape2D.Ellipse;
-import figures.shape2D.Polygon2D;
-import figures.shape2D.SymmetricFigure;
+import figures.shape2D.*;
 import utils.DrawAction;
 
 import javax.swing.*;
@@ -120,6 +117,20 @@ public class DrawPanel extends JPanel {
                             String str = JOptionPane.showInputDialog("Введите число вершин");
                             int n = Integer.parseInt(str);
                             figures.add(new SymmetricFigure(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points), n, points.get(1)));
+                            clearPoints();
+                        }
+                        break;
+                    case RECTANGLE:
+                        if (points.size() == 2) {
+                            figures.add(new Rectangle2D(points.get(0), MenuPanel.getCurrentBorderColor(),
+                                    MenuPanel.getCurrentFillColor(), new ArrayList<>(points), points.get(1)));
+                            clearPoints();
+                        }
+                        break;
+                    case RHOMBUS:
+                        if (points.size() == 2) {
+                            figures.add(new Rhombus2D(points.get(0), MenuPanel.getCurrentBorderColor(),
+                                    MenuPanel.getCurrentFillColor(), new ArrayList<>(points), points.get(1)));
                             clearPoints();
                         }
                         break;
