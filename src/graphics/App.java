@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class App extends JFrame {
-    private JPanel drawPanel;
+    private static DrawPanel drawPanel;
     private JPanel menuPanel;
     private static DrawAction mode;
 
@@ -31,5 +31,9 @@ public class App extends JFrame {
 
     public static void setMode(DrawAction mode) {
         App.mode = mode;
+    }
+
+    public static DrawPanel getDrawPanel() {
+        return drawPanel;
     }
 }

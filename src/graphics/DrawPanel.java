@@ -19,7 +19,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 
 public class DrawPanel extends JPanel {
-    private static ArrayList<Point> points;
+    private ArrayList<Point> points;
     private ArrayList<Shape> figures;
     private Shape curFigure;
 
@@ -64,13 +64,25 @@ public class DrawPanel extends JPanel {
                         }
                         break;
                     case POLYLINE:
-                        if (points.size() == 1) {
-                            figures.add(new PolyLine(points.get(0), MenuPanel.getCurrentBorderColor()));
-                        } else {
-                            PolyLine polyLine = (PolyLine) figures.get(figures.size() - 1);
-                            polyLine.addSegment(points.get(points.size() - 1), MenuPanel.getCurrentBorderColor());
+                        if(e.getClickCount()==1) {
+                            if (points.size() == 1) {
+                                figures.add(new PolyLine(points.get(0), MenuPanel.getCurrentBorderColor()));
+                            } else {
+                                PolyLine polyLine = (PolyLine) figures.get(figures.size() - 1);
+                                polyLine.addSegment(points.get(points.size() - 1), MenuPanel.getCurrentBorderColor());
+                            }
+                            break;
+                        } else if(e.getClickCount()==2){
+                            if (points.size() == 1) {
+                                figures.add(new PolyLine(points.get(0), MenuPanel.getCurrentBorderColor()));
+                                clearPoints();
+                            } else {
+                                PolyLine polyLine = (PolyLine) figures.get(figures.size() - 1);
+                                polyLine.addSegment(points.get(points.size() - 1), MenuPanel.getCurrentBorderColor());
+                                clearPoints();
+                            }
+                            break;
                         }
-                        break;
                     case ELLIPSE:
                         if(points.size() == 2){
                             figures.add(new Ellipse(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points.get(1)));
@@ -78,14 +90,25 @@ public class DrawPanel extends JPanel {
                         }
                         break;
                     case POLYGON:
-                        if(points.size() == 2){
-                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
+                        if (e.getClickCount()==1) {
+                            if (points.size() == 2) {
+                                figures.add(new Polygon2D(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
+                            } else if (points.size() > 2) {
+                                figures.remove(figures.size() - 1);
+                                figures.add(new Polygon2D(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
+                            }
+                            break;
+                        } else if(e.getClickCount()==2){
+                            if (points.size() == 2) {
+                                figures.add(new Polygon2D(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
+                                clearPoints();
+                            } else if (points.size() > 2) {
+                                figures.remove(figures.size() - 1);
+                                figures.add(new Polygon2D(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
+                                clearPoints();
+                            }
+                            break;
                         }
-                        else if(points.size() > 2){
-                            figures.remove(figures.size() - 1);
-                            figures.add(new Polygon2D(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points)));
-                        }
-                        break;
                     case CIRCLE:
                         if(points.size() == 2){
                             figures.add(new Circle(points.get(0), MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), points.get(1)));
@@ -94,11 +117,10 @@ public class DrawPanel extends JPanel {
                         break;
                     case SYMMETRICFIGURE:
                         if(points.size() == 2){
-                            figures.add(new SymmetricFigure(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points), points.size(), points.get(1)));
-                        }
-                        else if(points.size() > 2){
-                            figures.remove(figures.size() - 1);
-                            figures.add(new SymmetricFigure(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points), points.size(), points.get(1)));
+                            String str = JOptionPane.showInputDialog("Введите число вершин");
+                            int n = Integer.parseInt(str);
+                            figures.add(new SymmetricFigure(points.get(0),MenuPanel.getCurrentBorderColor(), MenuPanel.getCurrentFillColor(), new ArrayList<>(points), n, points.get(1)));
+                            clearPoints();
                         }
                         break;
                 }
@@ -128,7 +150,14 @@ public class DrawPanel extends JPanel {
         });
     }
 
-    public static void clearPoints() {
+    public void clearPoints() {
         points.clear();
+        repaint();
+    }
+
+    public void clear(){
+        clearPoints();
+        figures.clear();
+        repaint();
     }
 }
